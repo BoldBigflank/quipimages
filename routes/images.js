@@ -3,7 +3,7 @@ var router = express.Router();
 var im = require('gm').subClass({imageMagick:true});
 var fs = require('fs')
 
-router.get('/:prompt/:left/:right', function(req, res) {
+router.get('/:prompt/:left/:right.jpg', function(req, res) {
   im(__dirname + '/../public/images/photo-blank.jpg')
   .resize(768,576)
   .stroke("#000000", 1)
