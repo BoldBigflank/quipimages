@@ -31,10 +31,10 @@ router.get('/:prompt/:left/:right', function(req, res) {
   // Left
   .stroke("#000000", 2)
   .fill("#000000")
-  .drawText(-170, 2, req.params.left, 'center')
+  .drawText(-170, 2, wordWrap(req.params.left, 25), 'center')
   
   // Right
-  .drawText(160, -15, req.params.right, 'center')
+  .drawText(160, -15, wordWrap(req.params.right, 25), 'center')
 
 
   .toBuffer('jpg', function(err, buffer){
@@ -43,22 +43,54 @@ router.get('/:prompt/:left/:right', function(req, res) {
   });
 });
 
-router.get('/comment/:message', function(req, res) {
-    im(200, 150, "#999")
-    .stroke("#000000", 2)
-    .fill("#000000")
-    .comment("hi"+req.params.message+"|200x150")
+// router.get('/comment/:message', function(req, res) {
+//     im(200, 150, "#999")
+//     .stroke("#000000", 2)
+//     .fill("#000000")
+//     .comment("hi"+req.params.message+"|200x150")
 
 
-    .stroke("#000000", 2)
-    .fill("#000000")
-    .drawText(10, 10, "Stuff")
+//     .stroke("#000000", 2)
+//     .fill("#000000")
+//     .drawText(10, 10, "Stuff")
     
       
-    .toBuffer('jpg', function(err, buffer){
-        res.contentType('image/jpg');
-        res.send(buffer);
-    });
-});
+//     .toBuffer('jpg', function(err, buffer){
+//         res.contentType('image/jpg');
+//         res.send(buffer);
+//     });
+// });
+
+function wordWrap(str, maxWidth) {
+    var newLineStr = "\n"; done = false; res = '';
+    do {                    
+        found = false;
+        // Inserts new line at first whitespace of the line
+        for (i = maxWidth - 1; i >= 0; i--) {
+            if (testWhite(str.charAt(i))) {
+                res = res + [str.slice(0, i), newLineStr].join('');
+                str = str.slice(i + 1);
+                found = true;
+                break;
+            }
+        }
+        // Inserts new line at maxWidth position, the word is too long to wrap
+        if (!found) {
+            res += [str.slice(0, maxWidth), newLineStr].join('');
+            str = str.slice(maxWidth);
+        }
+
+        if (str.length < maxWidth)
+            done = true;
+    } while (!done);
+
+    return res+str;
+}
+
+function testWhite(x) {
+    var white = new RegExp(/^\s$/);
+    return white.test(x.charAt(0));
+};
+
 
 module.exports = router;
