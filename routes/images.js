@@ -12,10 +12,10 @@ router.get('/:prompt/:left/:right', function(req, res){
 });
 
 router.get('/:prompt/:left/:right/imgur', function(req, res){
-    var imageUrl = "http://quipimages.herokuapp.com/images/" + req.params.prompt + '/' + req.params.left + '/' + req.params.right;
+    var imageUrl = "http://quipimages.herokuapp.com/images/" + encodeURIComponent(req.params.prompt) + '/' + encodeURIComponent(req.params.left) + '/' + encodeURIComponent(req.params.right);
     imgur.upload(imageUrl, function (err,result) {
-      console.log(result.data.link);
-      res.send(result.data.link)
+        if(err) console.log("Error:" + err);
+        res.send(result.data.link);
     });
 
 });
@@ -52,8 +52,8 @@ function makeImage(req, res){
     .fill("#2fb3ed")
     .drawText(-100, -275, wrapText(req.params.prompt, 50), 'center')
     
-    .toBuffer('jpg', function(err, buffer){
-        res.contentType('image/jpg');
+    .toBuffer('png', function(err, buffer){
+        res.contentType('image/png');
         res.send(buffer);
     });
 }
