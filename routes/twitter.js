@@ -6,7 +6,7 @@ var Twitter = require("node-twitter-api");
 var twitter = new Twitter({
     consumerKey: process.env.TWITTER_CONSUMER_KEY,
     consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
-    callback: "http://localhost:5000/twitter/callback"
+    callback: "http://quipimages.herokuapp.com/twitter/callback"
 });
 
 router.get('/:prompt/:left/:right', function(req, res){
@@ -30,13 +30,11 @@ router.get("/request-token", function(req, res) {
 router.get("/callback", function(req, res){
     // Access is granted
     // Make the user do what it was going to do all along
-    console.log("Callback called", req.session.requestSecret, req.query.oauth_verifier);
     twitter.getAccessToken(req.query.oauth_token, req.session.requestSecret, req.query.oauth_verifier, function(error, accessToken, accessTokenSecret, results) {
     if (error) {
         console.log(error);
         res.status(200).send("Error");
     } else {
-        console.log("No error");
         //store accessToken and accessTokenSecret somewhere (associated to the user) 
         req.session.accessToken = accessToken;
         req.session.accessTokenSecret = accessTokenSecret;

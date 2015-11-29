@@ -8,7 +8,7 @@ var util  = require('util');
 var twitter = new Twitter({
     consumerKey: process.env.TWITTER_CONSUMER_KEY,
     consumerSecret: process.env.TWITTER_CONSUMER_SECRET,
-    callback: "http://localhost:5000/twitter/callback"
+    callback: "http://quipimage.herokuapp.com/twitter/callback"
 });
 
 
@@ -46,9 +46,6 @@ router.get('/:prompt/:left/:right/tweet', function(req, res){
 
             twitter.uploadMedia(params, req.session.accessToken, req.session.accessTokenSecret, function(err, upload_data, response){
                 if(err)console.log("Upload error:", err);
-                else{
-                    console.log("Uploaded:", upload_data.media_id_string);
-                }
                 // upload_data.media_id test 670888967030444032
                 twitter.statuses("update", {
                         status: prompt + defaultText,
@@ -59,11 +56,9 @@ router.get('/:prompt/:left/:right/tweet', function(req, res){
                     function(error, data, response) {
                         if (error) {
                             // something went wrong 
-                            console.log("Send tweet Error: ", error);
                             res.status(200).send(error);
                         } else {
                             // data contains the data sent by twitter 
-                            console.log("Data", data);
                             res.status(200).send("Your tweet has been sent. You may now close this window.");
                         }
                     }
