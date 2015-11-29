@@ -19,11 +19,11 @@ function makeImage(req, res){
     .stroke("#000000", 1)
     .fill("#000000")
     .rotate("#000", 5)
-    .drawText(-195, -45, wrapText(req.params.left, 25), 'center')
+    .drawText(-188, -45, wrapText(req.params.left, 23), 'center')
     
     // Right
     .rotate("#000", -10)
-    .drawText(76, -130, wrapText(req.params.right, 25), 'center')
+    .drawText(80, -130, wrapText(req.params.right, 23), 'center')
 
     .rotate("#000", 5) // Return to normal
     .crop(768, 576, 0, 0) // Fix the black bars from rotating
@@ -48,34 +48,38 @@ function makeImage(req, res){
 }
 
 function wrapText(text, maxChars) {
-        var ret = [];
-        var words = text.split(/\b/);
+    var ret = [];
+    var words = text.split(/\b/);
 
-        var currentLine = '';
-        var lastWhite = '';
-        words.forEach(function(d) {
-            var prev = currentLine;
-            currentLine += lastWhite + d;
+    var currentLine = '';
+    var lastWhite = '';
+    words.forEach(function(d) {
+        var prev = currentLine;
+        currentLine += lastWhite + d;
 
-            var l = currentLine.length;
+        var l = currentLine.length;
 
-            if (l > maxChars) {
-                ret.push(prev.trim());
-                currentLine = d;
-                lastWhite = '';
-            } else {
-                var m = currentLine.match(/(.*)(\s+)$/);
-                lastWhite = (m && m.length === 3 && m[2]) || '';
-                currentLine = (m && m.length === 3 && m[1]) || currentLine;
+        if (l > maxChars) {
+            ret.push(prev.trim());
+            if(d.length > maxChars){
+                ret.push(d.substring(0, maxChars));
+                d = d.substring(maxChars);
             }
-        });
-
-        if (currentLine) {
-            ret.push(currentLine.trim());
+            currentLine = d;
+            lastWhite = '';
+        } else {
+            var m = currentLine.match(/(.*)(\s+)$/);
+            lastWhite = (m && m.length === 3 && m[2]) || '';
+            currentLine = (m && m.length === 3 && m[1]) || currentLine;
         }
+    });
 
-        return ret.join("\n");
+    if (currentLine) {
+        ret.push(currentLine.trim());
     }
+
+    return ret.join("\n");
+}
 
 
 module.exports = router;
