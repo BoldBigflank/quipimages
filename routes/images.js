@@ -15,20 +15,22 @@ function makeImage(req, res){
     
 
     // Prompt Shadow
-    .font("Helvetica-Bold", 30)
+    // .font("Helvetica-Bold", 30)
+    .font(__dirname + '/../public/fonts/Arvo-Regular.ttf', 30)
     .stroke("#000000", 1)
     .fill("#000000")
     .drawText(0, -130, wrapText(req.params.prompt, 60), 'center')
     
     // Prompt
-    .font("Helvetica-Bold", 30)
+    // .font("Helvetica-Bold", 30)
     .stroke("#68ff4e", 1)
     .fill("#68ff4e")
     .drawText(0, -135, wrapText(req.params.prompt, 60), 'center')
     
 
     // Left
-    .font("Helvetica-Narrow", 24)
+    // .font("Helvetica-Narrow", 24)
+    .font(__dirname + '/../public/fonts/AmaticSC-Regular.ttf', 36)
     .stroke("#000000", 1)
     .fill("#000000")
     .drawText(-170, 2, wrapText(req.params.left, 25), 'center')
