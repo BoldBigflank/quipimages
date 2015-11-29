@@ -14,7 +14,6 @@ router.get('/:prompt/:left/:right', function(req, res){
 });
 
 router.get("/request-token", function(req, res) {
-    console.log("request-token called", req.session.requestToken);
     twitter.getRequestToken(function(err, requestToken, requestSecret, results) {
         if (err)
             res.status(500).send(err);

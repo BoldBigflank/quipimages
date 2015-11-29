@@ -48,7 +48,7 @@ router.get('/:prompt/:left/:right/tweet', function(req, res){
                 if(err)console.log("Upload error:", err);
                 // upload_data.media_id test 670888967030444032
                 twitter.statuses("update", {
-                        status: prompt + defaultText,
+                        status: req.params.prompt + defaultText,
                         media_ids: upload_data.media_id_string
                     },
                     req.session.accessToken,
