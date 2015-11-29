@@ -33,12 +33,15 @@ function makeImage(req, res){
     .font(__dirname + '/../public/fonts/AmaticSC-Regular.ttf', 36)
     .stroke("#000000", 1)
     .fill("#000000")
-    .drawText(-170, 2, wrapText(req.params.left, 25), 'center')
+    .rotate("#000", 5)
+    .drawText(-195, -45, wrapText(req.params.left, 25), 'center')
     
     // Right
-    .drawText(160, -15, wrapText(req.params.right, 25), 'center')
+    .rotate("#000", -10)
+    .drawText(76, -130, wrapText(req.params.right, 25), 'center')
 
-
+    .rotate("#000", 5) // Return to normal
+    .crop(768, 576, 0, 0) // Fix the black bars from rotating
     .toBuffer('jpg', function(err, buffer){
         res.contentType('image/jpg');
         res.send(buffer);
