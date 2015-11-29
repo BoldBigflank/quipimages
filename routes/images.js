@@ -9,7 +9,7 @@ router.get('/:prompt/:left/:right', function(req, res){
 });
 
 function makeImage(req, res){
-    im(__dirname + '/../public/images/photo-blank.jpg')
+    im(__dirname + '/../public/images/photo-large.png')
     .resize(768,576)
     .stroke("#000000", 1)
     
