@@ -7,7 +7,7 @@ javascript: {
 
 
     function updatePrompt(){
-        prompt = $("#state-vote #question-text").html();
+        prompt = $("#state-vote #question-text").text();
         console.log("Prompt = " + prompt);
     }
 
