@@ -2,12 +2,23 @@ var express = require('express');
 var router = express.Router();
 var im = require('gm').subClass({imageMagick:true});
 var fs = require('fs');
+var imgur = require('imgur-node-api');
+
+imgur.setClientID(process.env.IMGUR_CLIENT || "");
 
 
 router.get('/:prompt/:left/:right', function(req, res){
     makeImage(req, res);
 });
 
+router.get('/:prompt/:left/:right/imgur', function(req, res){
+    var imageUrl = "http://quipimages.herokuapp.com/images/" + req.params.prompt + '/' + req.params.left + '/' + req.params.right;
+    imgur.upload(imageUrl, function (err,result) {
+      console.log(result.data.link);
+      res.send(result.data.link)
+    });
+
+});
 function makeImage(req, res){
     im(__dirname + '/../public/images/photo-large.png')
     .resize(768,576)
@@ -46,6 +57,8 @@ function makeImage(req, res){
         res.send(buffer);
     });
 }
+
+
 
 function wrapText(text, maxChars) {
     var ret = [];
