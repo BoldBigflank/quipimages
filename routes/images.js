@@ -4,6 +4,9 @@ var im = require('gm').subClass({imageMagick:true});
 var fs = require('fs');
 var imgur = require('imgur-node-api');
 
+var defaultText = "I'm literally LOLing #Quiplash @jackboxgames";
+var tweetLink = "http://twitter.com/home?status=";
+
 imgur.setClientID(process.env.IMGUR_CLIENT || "");
 
 
@@ -11,11 +14,15 @@ router.get('/:prompt/:left/:right', function(req, res){
     makeImage(req, res);
 });
 
-router.get('/:prompt/:left/:right/imgur', function(req, res){
+router.get('/:prompt/:left/:right/tweet', function(req, res){
     var imageUrl = "http://quipimages.herokuapp.com/images/" + encodeURIComponent(req.params.prompt) + '/' + encodeURIComponent(req.params.left) + '/' + encodeURIComponent(req.params.right);
     imgur.upload(imageUrl, function (err,result) {
         if(err) console.log("Error:" + err);
-        res.send(result.data.link);
+        
+        var tweetMessage = encodeURIComponent( defaultText + " " + result.data.link);
+        var redirectUrl = tweetLink + tweetMessage;
+
+        res.redirect(redirectUrl);
     });
 
 });

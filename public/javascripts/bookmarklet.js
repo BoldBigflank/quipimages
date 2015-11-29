@@ -28,20 +28,11 @@ javascript: {
             return false;
         }
 
-        var imageUri = "/" + encodeURIComponent( prompt ) + "/" + encodeURIComponent( choices[0] ) + "/" + encodeURIComponent( choices[1] ) + "/imgur";
+        var imageUri = "/" + encodeURIComponent( prompt ) + "/" + encodeURIComponent( choices[0] ) + "/" + encodeURIComponent( choices[1] ) + "/tweet";
         var imageUrl = imageHost + imageUri;
-
-        $.get(imageUrl, function(imgurUrl, status){
-            // Get an imgur url
-            var tweetMessage = encodeURIComponent(defaultText + " " + imgurUrl);
-            
-            tweetUrl = tweetLink + tweetMessage;
-            var win = window.open(tweetUrl, "_blank");
-            win.focus();
-
-            console.log(tweetUrl);
-            return false;
-        });
+        
+        var win = window.open(imageUrl, "_blank");
+        win.focus();
     }
 
     function voteHandler(event){
