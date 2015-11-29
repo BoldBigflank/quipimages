@@ -23,8 +23,8 @@ function makeImage(req, res){
     
     // Prompt
     // .font("Helvetica-Bold", 30)
-    .stroke("#68ff4e", 1)
-    .fill("#68ff4e")
+    .stroke("#2fb3ed", 1)
+    .fill("#2fb3ed")
     .drawText(0, -135, wrapText(req.params.prompt, 60), 'center')
     
 
