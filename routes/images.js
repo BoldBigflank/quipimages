@@ -94,13 +94,13 @@ function makeImage(prompt, left, right, cb){
     .font(__dirname + '/../public/fonts/Arvo-Regular.ttf', 30)
     .stroke("#000000", 1)
     .fill("#000000")
-    .drawText(-100, -270, wrapText(prompt, 50), 'center')
+    .drawText(-110, -270, wrapText(prompt, 48), 'center')
     
     // Prompt
     // .font("Helvetica-Bold", 30)
     .stroke("#2fb3ed", 1)
     .fill("#2fb3ed")
-    .drawText(-100, -275, wrapText(prompt, 50), 'center')
+    .drawText(-110, -275, wrapText(prompt, 48), 'center')
     
     .toBuffer('png', function(err, buffer){
         cb(buffer);
