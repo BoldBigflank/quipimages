@@ -22,6 +22,14 @@ a {
   font-style: italic;
 }
 
+.image-container{
+    min-height:300px;
+    min-width:400px;
+    background-image:url('/images/squares.svg');
+    background-repeat:no-repeat;
+    background-position:center;
+}
+
 .preview-image{
     max-height:300px;
     margin:auto;

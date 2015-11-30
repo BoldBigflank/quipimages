@@ -2,16 +2,19 @@ extends layout
 
 block content
     .container
-        .center-block.text-center
-            img.preview-image.img-responsive(src='#{image}')
-        // Example row of columns
         form(method="post")
             .form-group
                 label
                     | Tweet text:
                 textarea.form-control
                     | #{prompt} @jackboxgames #Quiplash
+            .form-group
                 button.btn.btn-primary(type='submit')
                     | Tweet!
+        .center-block.text-center
+            #jumbo.jumbotron
+                div.image-container
+                    img.preview-image.img-responsive(src='#{image}')
+        
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
     script(src='https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js')
