@@ -1,5 +1,17 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+    .container
+        .center-block.text-center
+            img.preview-image.img-responsive(src='#{image}')
+        // Example row of columns
+        form(method="post")
+            .form-group
+                label
+                    | Tweet text:
+                textarea.form-control
+                    | #{prompt} @jackboxgames #Quiplash
+                button.btn.btn-primary(type='submit')
+                    | Tweet!
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
+    script(src='https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js')

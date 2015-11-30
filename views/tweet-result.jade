@@ -1,0 +1,22 @@
+extends layout
+
+block content
+    .container
+        - if (error)
+            .center-block.text-center
+                h1 Tweet failed - try again
+                br
+                p
+                    .label.label-danger(style="font-size:6em")
+                        span.glyphicon.glyphicon-remove(aria-hidden="true")
+        - else
+            .center-block.text-center
+                h1 Tweet posted
+                br
+                p
+                    .label.label-success(style="font-size:6em")
+                        span.glyphicon.glyphicon-ok(aria-hidden="true")
+    script.
+        setTimeout(function(){window.close();}, 1000);
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
+    script(src='https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js')

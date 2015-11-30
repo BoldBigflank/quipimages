@@ -31,6 +31,18 @@ router.get('/:prompt/:left/:right', function(req, res){
 });
 
 router.get('/:prompt/:left/:right/tweet', function(req, res){
+    var imageUri = "/images/" + encodeURIComponent( req.params.prompt ) + "/" + encodeURIComponent( req.params.left ) + "/" + encodeURIComponent( req.params.right );
+    var tweetUri = "/images/" + encodeURIComponent( req.params.prompt ) + "/" + encodeURIComponent( req.params.left ) + "/" + encodeURIComponent( req.params.right ) + "/tweet";
+
+    res.render('index', {
+        title: "Send Tweet",
+        image: imageUri,
+        prompt: req.params.prompt
+    })
+
+})
+
+router.post('/:prompt/:left/:right/tweet', function(req, res){
     if(!req.session.accessToken){
         req.session.originalUrl = req.originalUrl;
         res.redirect('/twitter/request-token');
@@ -56,10 +68,12 @@ router.get('/:prompt/:left/:right/tweet', function(req, res){
                     function(error, data, response) {
                         if (error) {
                             // something went wrong 
-                            res.status(200).send(error);
+                            // res.status(200).send(error);
+                            res.render('tweet-result', { title: 'Express', error:true });
                         } else {
                             // data contains the data sent by twitter 
                             res.status(200).send("Your tweet has been sent. You may now close this window.");
+                            res.render('tweet-result', { title: 'Express', error:false });
                         }
                     }
                 );
@@ -79,14 +93,14 @@ function makeImage(prompt, left, right, cb){
     .font(__dirname + '/../public/fonts/AmaticSC-Regular.ttf', 36)
     .stroke("#000000", 1)
     .fill("#000000")
-    .rotate("#000", 5)
-    .drawText(-192, -0, wrapText(left, 23), 'center')
+    .rotate("#000", 6)
+    .drawText(-199, 0, wrapText(left, 23), 'center')
     
     // Right
-    .rotate("#000", -10)
-    .drawText(84, -95, wrapText(right, 23), 'center')
+    .rotate("#000", -12)
+    .drawText(74, -91, wrapText(right, 23), 'center')
 
-    .rotate("#000", 5) // Return to normal
+    .rotate("#000", 6) // Return to normal
     .crop(768, 576, 0, 0) // Fix the black bars from rotating
 
     // Prompt Shadow
@@ -94,13 +108,13 @@ function makeImage(prompt, left, right, cb){
     .font(__dirname + '/../public/fonts/Arvo-Regular.ttf', 30)
     .stroke("#000000", 1)
     .fill("#000000")
-    .drawText(-110, -265, wrapText(prompt, 47), 'center')
+    .drawText(-130, -280, wrapText(prompt, 42), 'center')
     
     // Prompt
     // .font("Helvetica-Bold", 30)
     .stroke("#2fb3ed", 1)
     .fill("#2fb3ed")
-    .drawText(-110, -270, wrapText(prompt, 47), 'center')
+    .drawText(-130, -285, wrapText(prompt, 42), 'center')
     
     .toBuffer('png', function(err, buffer){
         cb(buffer);

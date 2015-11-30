@@ -6,3 +6,23 @@ body {
 a {
   color: #00B7FF;
 }
+
+#jumbo {
+  background-color: #333;
+  color: #eee;
+}
+#jumbo p {
+  font-size: 16px;
+}
+#try-header {
+  margin: 30px 0px;
+}
+#try-more {
+  margin: 30px 0px;
+  font-style: italic;
+}
+
+.preview-image{
+    max-height:300px;
+    margin:auto;
+}
