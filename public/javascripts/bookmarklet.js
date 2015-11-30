@@ -2,9 +2,7 @@ javascript: {
     var prompt = false;
     var choices = [];
     var imageHost = "http://quipimages.herokuapp.com/images";
-    var defaultText = "I'm literally LOLing #Quiplash @jackboxgames";
-    var tweetLink = "http://twitter.com/home?status=";
-
+    
 
     function updatePrompt(){
         prompt = $("#state-vote #question-text").text();
@@ -28,7 +26,11 @@ javascript: {
             return false;
         }
 
-        var imageUri = "/" + encodeURIComponent( prompt ) + "/" + encodeURIComponent( choices[0] ) + "/" + encodeURIComponent( choices[1] ) + "/tweet";
+        var imageUri = "/tweet?prompt=" + encodeURIComponent( prompt );
+
+        for(var i = 0; i < choices.length; i++){
+            imageUri += "&choice=" + encodeURIComponent( choices[i] );
+        }
         var imageUrl = imageHost + imageUri;
         
         var win = window.open(imageUrl, "_blank");
