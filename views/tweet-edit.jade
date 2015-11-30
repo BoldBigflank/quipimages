@@ -6,7 +6,7 @@ block content
             .form-group
                 label
                     | Tweet text:
-                textarea#tweet-text.form-control
+                textarea#tweettext.form-control(name="tweettext")
                     | #{prompt} @jackboxgames #Quiplash
             .form-group
                 button.btn.btn-primary(type='submit')
@@ -16,7 +16,7 @@ block content
                 div.image-container
                     img.preview-image.img-responsive(src='#{image}')
     script.
-        var input = document.getElementById("tweet-text");
+        var input = document.getElementById("tweettext");
         input.setSelectionRange(0, #{prompt.length});
         input.focus();
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')

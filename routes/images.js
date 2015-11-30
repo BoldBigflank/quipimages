@@ -16,7 +16,6 @@ var defaultText = " #Quiplash @jackboxgames";
 var tweetLink = "http://twitter.com/home?status=";
 
 router.get('/', function(req, res){
-    console.log("choices", req.query.choice);
     makeImage(req.query.prompt, req.query.choice, function(buffer){
         res.contentType('image/png');
         res.send(buffer);
@@ -51,7 +50,7 @@ router.post('/tweet', function(req, res){
                 if(err)console.log("Upload error:", err);
                 // upload_data.media_id test 670888967030444032
                 twitter.statuses("update", {
-                        status: req.query.prompt + defaultText,
+                        status: req.body.tweettext,
                         media_ids: upload_data.media_id_string
                     },
                     req.session.accessToken,
