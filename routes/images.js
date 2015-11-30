@@ -70,7 +70,7 @@ router.get('/:prompt/:left/:right/tweet', function(req, res){
 
 function makeImage(prompt, left, right, cb){
 // function makeImage(req, res){
-    im(__dirname + '/../public/images/photo-large.png')
+    im(__dirname + '/../public/images/photo-centered.png')
     .resize(768,576)
     .stroke("#000000", 1)
 
@@ -80,11 +80,11 @@ function makeImage(prompt, left, right, cb){
     .stroke("#000000", 1)
     .fill("#000000")
     .rotate("#000", 5)
-    .drawText(-188, -45, wrapText(left, 23), 'center')
+    .drawText(-192, -0, wrapText(left, 23), 'center')
     
     // Right
     .rotate("#000", -10)
-    .drawText(80, -130, wrapText(right, 23), 'center')
+    .drawText(84, -95, wrapText(right, 23), 'center')
 
     .rotate("#000", 5) // Return to normal
     .crop(768, 576, 0, 0) // Fix the black bars from rotating
@@ -94,13 +94,13 @@ function makeImage(prompt, left, right, cb){
     .font(__dirname + '/../public/fonts/Arvo-Regular.ttf', 30)
     .stroke("#000000", 1)
     .fill("#000000")
-    .drawText(-110, -270, wrapText(prompt, 48), 'center')
+    .drawText(-110, -255, wrapText(prompt, 47), 'center')
     
     // Prompt
     // .font("Helvetica-Bold", 30)
     .stroke("#2fb3ed", 1)
     .fill("#2fb3ed")
-    .drawText(-110, -275, wrapText(prompt, 48), 'center')
+    .drawText(-110, -260, wrapText(prompt, 47), 'center')
     
     .toBuffer('png', function(err, buffer){
         cb(buffer);
