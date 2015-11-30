@@ -29,7 +29,7 @@ router.get('/tweet', function(req, res){
     res.render('tweet-edit', {
         title: "Send Tweet",
         image: imageUri,
-        prompt: req.params.prompt
+        prompt: "" + req.query.prompt
     });
 });
 
