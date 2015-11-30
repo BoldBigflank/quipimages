@@ -68,11 +68,9 @@ router.post('/:prompt/:left/:right/tweet', function(req, res){
                     function(error, data, response) {
                         if (error) {
                             // something went wrong 
-                            // res.status(200).send(error);
                             res.render('tweet-result', { title: 'Express', error:true });
                         } else {
                             // data contains the data sent by twitter 
-                            res.status(200).send("Your tweet has been sent. You may now close this window.");
                             res.render('tweet-result', { title: 'Express', error:false });
                         }
                     }
