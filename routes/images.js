@@ -24,7 +24,7 @@ router.get('/', function(req, res){
 });
 
 router.get('/tweet', function(req, res){
-    var imageUri = "/images/?prompt=" + encodeURIComponent( req.query.prompt ) + "&choice=" + encodeURIComponent( req.query.choices[0] ) + "&choice=" + encodeURIComponent( req.query.choices[1] );
+    var imageUri = "/images/?prompt=" + encodeURIComponent( req.query.prompt ) + "&choice=" + encodeURIComponent( req.query.choice[0] ) + "&choice=" + encodeURIComponent( req.query.choice[1] );
     
     res.render('tweet-edit', {
         title: "Send Tweet",
