@@ -7,7 +7,6 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
 var images = require('./routes/images');
 var twitter = require('./routes/twitter');
 
@@ -36,7 +35,6 @@ app.use(session({
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
-app.use('/users', users);
 app.use('/images', images);
 app.use('/twitter', twitter);
 
