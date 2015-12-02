@@ -3,6 +3,7 @@ var router = express.Router();
 var im = require('gm').subClass({imageMagick:true});
 var fs = require('fs');
 var Twitter = require("node-twitter-api");
+var url = require('url');
 var util  = require('util');
 
 var twitter = new Twitter({
@@ -48,7 +49,8 @@ router.get('/tweet', function(req, res){
         req.session.originalUrl = req.originalUrl;
         res.redirect('/twitter/request-token');
     } else {
-        var imageUri = "/images/?prompt=" + encodeURIComponent( req.query.prompt ) + "&choice=" + encodeURIComponent( req.query.choice[0] ) + "&choice=" + encodeURIComponent( req.query.choice[1] );
+
+        var imageUri = "/images/?" + url.parse(req.url).query;
         
         res.render('tweet-edit', {
             title: "Send Tweet",
