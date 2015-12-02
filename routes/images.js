@@ -16,15 +16,15 @@ var defaultText = " #Quiplash @jackboxgames";
 var tweetLink = "http://twitter.com/home?status=";
 
 var positions = {
-    1: {"x": -200, "y": 200},
-    2: {"x": 0, "y": 200},
-    3: {"x": 200, "y": 200},
-    4: {"x": -200, "y": 0},
-    5: {"x": 0, "y": 0},
-    6: {"x": 200, "y": 0},
-    7: {"x": -200, "y": -200},
-    8: {"x": 0, "y": -200},
-    9: {"x": 200, "y": -200}
+    1: {"x": -250,  "y": -60},
+    2: {"x": 0,     "y": -60},
+    3: {"x": 250,   "y": -60},
+    4: {"x": -250,  "y": 40},
+    5: {"x": 0,     "y": 40},
+    6: {"x": 250,   "y": 40},
+    7: {"x": -250,  "y": 140},
+    8: {"x": 0,     "y": 140},
+    9: {"x": 250,   "y": 140}
 };
 
 var arrangements = {
@@ -135,7 +135,6 @@ function makeImage(prompt, choices, cb){
             cb(buffer);
         });
     } else {
-        // Make the 8 choice version
         var arrangement = arrangements[choices.length];
         
         // Create the image
@@ -149,9 +148,19 @@ function makeImage(prompt, choices, cb){
         .fill("#000000");
         
         for(var i = 0; i < choices.length; i++){
-            var position = positions[arrangement[i]];
 
-            image.drawText(position.x, position.y, wrapText(choices[i], 23), 'center');
+
+
+            var position = positions[arrangement[i]];
+            image
+            .gravity('Center')
+            .fill("#FFFFFF")
+            .drawRectangle(position.x-100 + (768/2), position.y-40 + (576/2), 
+                position.x+100 + (768/2), position.y+40 + (576/2), 0, 0)
+            .fill("#000000")
+            .drawText(position.x, position.y, wrapText(choices[i], 30), 'center');
+
+
         }
 
 
@@ -160,12 +169,12 @@ function makeImage(prompt, choices, cb){
         .font(__dirname + '/../public/fonts/Arvo-Regular.ttf', 30)
         .stroke("#000000", 1)
         .fill("#000000")
-        .drawText(-130, -280, wrapText(prompt, 42), 'center')
+        .drawText(0, -170, wrapText(prompt, 42), 'center')
         
         // Prompt
         .stroke("#2fb3ed", 1)
         .fill("#2fb3ed")
-        .drawText(-130, -285, wrapText(prompt, 42), 'center')
+        .drawText(0, -175, wrapText(prompt, 42), 'center')
         
         .toBuffer('png', function(err, buffer){
             cb(buffer);
