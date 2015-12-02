@@ -160,10 +160,9 @@ function makeImage(prompt, choices, cb){
 
             var position = positions[arrangement[i]];
             image
-            .gravity('Center')
             .fill("#FFFFFF")
             .stroke("#000000", 3)
-            .drawRectangle(position.x-100 + (768/2), position.y-40 + (576/2), 
+            .drawRectangle(position.x-100 + (768/2), position.y-40 + (576/2),
                 position.x+100 + (768/2), position.y+40 + (576/2), 0, 0)
             .fill("#000000")
             .stroke("#000000", 1)
