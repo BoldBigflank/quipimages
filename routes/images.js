@@ -44,13 +44,18 @@ router.get('/', function(req, res){
 });
 
 router.get('/tweet', function(req, res){
-    var imageUri = "/images/?prompt=" + encodeURIComponent( req.query.prompt ) + "&choice=" + encodeURIComponent( req.query.choice[0] ) + "&choice=" + encodeURIComponent( req.query.choice[1] );
-    
-    res.render('tweet-edit', {
-        title: "Send Tweet",
-        image: imageUri,
-        prompt: "" + req.query.prompt
-    });
+    if(!req.session.accessToken){
+        req.session.originalUrl = req.originalUrl;
+        res.redirect('/twitter/request-token');
+    } else {
+        var imageUri = "/images/?prompt=" + encodeURIComponent( req.query.prompt ) + "&choice=" + encodeURIComponent( req.query.choice[0] ) + "&choice=" + encodeURIComponent( req.query.choice[1] );
+        
+        res.render('tweet-edit', {
+            title: "Send Tweet",
+            image: imageUri,
+            prompt: "" + req.query.prompt
+        });
+    }
 });
 
 router.post('/tweet', function(req, res){
