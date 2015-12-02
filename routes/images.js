@@ -15,8 +15,30 @@ var defaultText = " #Quiplash @jackboxgames";
 
 var tweetLink = "http://twitter.com/home?status=";
 
+var positions = {
+    1: {"x": -200, "y": 200},
+    2: {"x": 0, "y": 200},
+    3: {"x": 200, "y": 200},
+    4: {"x": -200, "y": 0},
+    5: {"x": 0, "y": 0},
+    6: {"x": 200, "y": 0},
+    7: {"x": -200, "y": -200},
+    8: {"x": 0, "y": -200},
+    9: {"x": 200, "y": -200}
+};
+
+var arrangements = {
+    3: ["4", "5", "6"],
+    4: ["1", "3", "7", "9"],
+    5: ["2", "4", "5", "6", "8"],
+    6: ["1", "2", "3", "7", "8", "9"],
+    7: ["1", "2", "3", "5", "7", "8", "9"],
+    8: ["1", "2", "3", "4", "6", "7", "8", "9"]
+};
+
 router.get('/', function(req, res){
     makeImage(req.query.prompt, req.query.choice, function(buffer){
+        console.log("sending a buffer");
         res.contentType('image/png');
         res.send(buffer);
     });
@@ -100,14 +122,12 @@ function makeImage(prompt, choices, cb){
         .crop(768, 576, 0, 0) // Fix the black bars from rotating
 
         // Prompt Shadow
-        // .font("Helvetica-Bold", 30)
         .font(__dirname + '/../public/fonts/Arvo-Regular.ttf', 30)
         .stroke("#000000", 1)
         .fill("#000000")
         .drawText(-130, -280, wrapText(prompt, 42), 'center')
         
         // Prompt
-        // .font("Helvetica-Bold", 30)
         .stroke("#2fb3ed", 1)
         .fill("#2fb3ed")
         .drawText(-130, -285, wrapText(prompt, 42), 'center')
@@ -117,6 +137,41 @@ function makeImage(prompt, choices, cb){
         });
     } else {
         // Make the 8 choice version
+        var arrangement = arrangements[choices.length];
+        
+        // Create the image
+        var image = im(__dirname + '/../public/images/arrangement-' + choices.length + '.png')
+        .resize(768,576)
+        .stroke("#000000", 1)
+
+        // Write the choices
+        .font(__dirname + '/../public/fonts/AmaticSC-Regular.ttf', 24)
+        .stroke("#000000", 1)
+        .fill("#000000");
+        
+        for(var i = 0; i < choices.length; i++){
+            var position = positions[arrangement[i]];
+
+            image.drawText(position.x, position.y, wrapText(choices[i], 23), 'center');
+        }
+
+
+        // Prompt Shadow
+        image
+        .font(__dirname + '/../public/fonts/Arvo-Regular.ttf', 30)
+        .stroke("#000000", 1)
+        .fill("#000000")
+        .drawText(-130, -280, wrapText(prompt, 42), 'center')
+        
+        // Prompt
+        .stroke("#2fb3ed", 1)
+        .fill("#2fb3ed")
+        .drawText(-130, -285, wrapText(prompt, 42), 'center')
+        
+        .toBuffer('png', function(err, buffer){
+            cb(buffer);
+        });
+
         cb(null);
     }
     
