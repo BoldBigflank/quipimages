@@ -38,7 +38,6 @@ var arrangements = {
 
 router.get('/', function(req, res){
     makeImage(req.query.prompt, req.query.choice, function(buffer){
-        console.log("sending a buffer");
         res.contentType('image/png');
         res.send(buffer);
     });
@@ -171,8 +170,6 @@ function makeImage(prompt, choices, cb){
         .toBuffer('png', function(err, buffer){
             cb(buffer);
         });
-
-        cb(null);
     }
     
 }
