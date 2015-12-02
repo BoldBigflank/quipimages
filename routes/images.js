@@ -155,9 +155,11 @@ function makeImage(prompt, choices, cb){
             image
             .gravity('Center')
             .fill("#FFFFFF")
+            .stroke("#000000", 3)
             .drawRectangle(position.x-100 + (768/2), position.y-40 + (576/2), 
                 position.x+100 + (768/2), position.y+40 + (576/2), 0, 0)
             .fill("#000000")
+            .stroke("#000000", 1)
             .drawText(position.x, position.y, wrapText(choices[i], 30), 'center');
 
 
