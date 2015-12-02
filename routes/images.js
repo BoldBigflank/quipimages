@@ -17,15 +17,15 @@ var defaultText = " #Quiplash @jackboxgames";
 var tweetLink = "http://twitter.com/home?status=";
 
 var positions = {
-    1: {"x": -250,  "y": -60},
-    2: {"x": 0,     "y": -60},
-    3: {"x": 250,   "y": -60},
-    4: {"x": -250,  "y": 40},
-    5: {"x": 0,     "y": 40},
-    6: {"x": 250,   "y": 40},
-    7: {"x": -250,  "y": 140},
-    8: {"x": 0,     "y": 140},
-    9: {"x": 250,   "y": 140}
+    1: {"x": -205,  "y": -40},
+    2: {"x": 0,     "y": -35},
+    3: {"x": 205,   "y": -40},
+    4: {"x": -205,  "y": 50},
+    5: {"x": 0,     "y": 50},
+    6: {"x": 205,   "y": 50},
+    7: {"x": -205,  "y": 140},
+    8: {"x": 0,     "y": 135},
+    9: {"x": 205,   "y": 140}
 };
 
 var arrangements = {
@@ -155,20 +155,15 @@ function makeImage(prompt, choices, cb){
         .fill("#000000");
         
         for(var i = 0; i < choices.length; i++){
-
-
-
             var position = positions[arrangement[i]];
             image
-            .fill("#FFFFFF")
-            .stroke("#000000", 3)
-            .drawRectangle(position.x-100 + (768/2), position.y-40 + (576/2),
-                position.x+100 + (768/2), position.y+40 + (576/2), 2, 2)
+            // .fill("#FFFFFF")
+            // .stroke("#000000", 3)
+            // .drawRectangle(position.x-100 + (768/2), position.y-40 + (576/2),
+            //     position.x+100 + (768/2), position.y+40 + (576/2), 2, 2)
             .fill("#000000")
             .stroke("#000000", 1)
             .drawText(position.x, position.y, wrapText(choices[i], 30), 'center');
-
-
         }
 
 
@@ -177,12 +172,12 @@ function makeImage(prompt, choices, cb){
         .font(__dirname + '/../public/fonts/Arvo-Regular.ttf', 30)
         .stroke("#000000", 1)
         .fill("#000000")
-        .drawText(0, -150, wrapText(prompt, 42), 'center')
+        .drawText(0, -135, wrapText(prompt, 42), 'center')
         
         // Prompt
         .stroke("#2fb3ed", 1)
         .fill("#2fb3ed")
-        .drawText(0, -155, wrapText(prompt, 42), 'center')
+        .drawText(0, -140, wrapText(prompt, 42), 'center')
         
         .toBuffer('png', function(err, buffer){
             cb(buffer);
