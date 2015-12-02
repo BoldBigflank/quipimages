@@ -171,12 +171,12 @@ function makeImage(prompt, choices, cb){
         .font(__dirname + '/../public/fonts/Arvo-Regular.ttf', 30)
         .stroke("#000000", 1)
         .fill("#000000")
-        .drawText(0, -170, wrapText(prompt, 42), 'center')
+        .drawText(0, -150, wrapText(prompt, 42), 'center')
         
         // Prompt
         .stroke("#2fb3ed", 1)
         .fill("#2fb3ed")
-        .drawText(0, -175, wrapText(prompt, 42), 'center')
+        .drawText(0, -155, wrapText(prompt, 42), 'center')
         
         .toBuffer('png', function(err, buffer){
             cb(buffer);
