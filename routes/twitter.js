@@ -21,7 +21,7 @@ router.get("/request-token", function(req, res) {
             console.log("Found token", requestToken);
             req.session.requestToken = requestToken;
             req.session.requestSecret = requestSecret;
-            res.redirect("https://twitter.com/oauth/authenticate?oauth_token=" + requestToken);
+            res.redirect("https://api.twitter.com/oauth/authenticate?oauth_token=" + requestToken);
         }
     });
 });
