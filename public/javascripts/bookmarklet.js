@@ -6,22 +6,20 @@ javascript: {
 
     function updatePrompt(){
         prompt = $("#state-vote #question-text").text();
-        console.log("Prompt = " + prompt);
     }
 
     function updateChoices(){
-        choices = [];
-
         var domChoices = document.getElementById("quiplash-vote").childNodes;
+        if(domChoices.length > 2 && domChoices.length == choices.length) return;
+
+        choices = [];
         for (var i = 0; i < domChoices.length; i++ ){
             var choice = domChoices[i];
             choices.push(choice.innerHTML);
         }
-        console.log("Choices = " + choices);
     }
 
     function sendTweet(event){
-        console.log("TweetThis button pressed");
         if(choices.length < 2){
             return false;
         }
@@ -39,10 +37,11 @@ javascript: {
 
     function voteHandler(event){
 
-        console.log("Vote updated");
         if(document.getElementById("quiplash-vote").innerHTML !== ""){
             updateChoices();
             updatePrompt();
+            var tweetLink = document.getElementById("tweetLink");
+            tweetLink.innerHTML = "Tweet this"
         }
 
     }
@@ -50,7 +49,7 @@ javascript: {
     document.getElementById("quiplash-vote").addEventListener('DOMSubtreeModified', voteHandler);
 
     var playerHolder = document.getElementById("player");
-    playerHolder.innerHTML = playerHolder.innerHTML + "<a href='javascript:void(0);' onclick='sendTweet()'>Tweet this</a>";
-
+    playerHolder.innerHTML = playerHolder.innerHTML + "<a id='tweetLink' href='javascript:void(0);' onclick='sendTweet()'></a>";
+    playerHolder.style.backgroundColor = "#ffcc00";
 }
 void(0);
