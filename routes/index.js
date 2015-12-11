@@ -5,7 +5,7 @@ var router = express.Router();
 router.get('/', function(req, res) {
     var fs = require('fs');
     var file = fs.readFileSync(__dirname + "/../public/javascripts/bookmarklet.js", "utf8");
-    res.render('index', { bookmarklet: file });
+    res.render('index', { bookmarklet: file.replace("\n", "") });
 });
 
 module.exports = router;
