@@ -57,9 +57,9 @@ javascript: {
     if(!tweetThisButtonInitialized){
         if (quiplashVote !== null) quiplashVote.addEventListener('DOMSubtreeModified', voteHandler);
         if (playerHolder) playerHolder.innerHTML = playerHolder.innerHTML + "<a id='tweetLink' href='javascript:void(0);' onclick='sendTweet()'></a>";
-        if (playerHolder) playerHolder.style.backgroundColor = "#ffcc00";
         tweetThisButtonInitialized = true;
     }
+    if (playerHolder) playerHolder.style.backgroundColor = "#ffcc00";
 
 }
 void(0);
