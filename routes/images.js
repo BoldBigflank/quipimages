@@ -17,15 +17,15 @@ var defaultText = " #Quiplash @jackboxgames";
 var tweetLink = "http://twitter.com/home?status=";
 
 var positions = {
-    1: {"x": -205,  "y": -40},
-    2: {"x": 0,     "y": -35},
-    3: {"x": 205,   "y": -40},
-    4: {"x": -205,  "y": 50},
-    5: {"x": 0,     "y": 50},
-    6: {"x": 205,   "y": 50},
-    7: {"x": -205,  "y": 140},
-    8: {"x": 0,     "y": 135},
-    9: {"x": 205,   "y": 140}
+    1: {"x": -375,  "y": -157},
+    2: {"x": -145,     "y": -225},
+    3: {"x": 235,   "y": -70},
+    4: {"x": -420,  "y": -115},
+    5: {"x": -145,     "y": -115},
+    6: {"x": 125,   "y": -115},
+    7: {"x": -315,  "y": 122},
+    8: {"x": -145,     "y": -5},
+    9: {"x": 180,   "y": 30}
 };
 
 var arrangements = {
@@ -109,34 +109,34 @@ function makeImage(prompt, choices, cb){
 
     if(choices.length == 2){
         im(__dirname + '/../public/images/photo-centered.png')
-        .resize(768,576)
+        // .resize(768,576)
         .stroke("#000000", 1)
 
         // Left
         // .font("Helvetica-Narrow", 24)
-        .font(__dirname + '/../public/fonts/AmaticSC-Regular.ttf', 36)
+        .font(__dirname + '/../public/fonts/AmaticSC-Regular.ttf', 48)
         .stroke("#000000", 1)
         .fill("#000000")
         .rotate("#000", 6)
-        .drawText(-199, 0, wrapText(choices[0], 23), 'center')
+        .drawText(-265, 0, wrapText(choices[0], 23), 'center')
         
         // Right
         .rotate("#000", -12)
-        .drawText(74, -91, wrapText(choices[1], 23), 'center')
+        .drawText(99, -121, wrapText(choices[1], 23), 'center')
 
         .rotate("#000", 6) // Return to normal
-        .crop(768, 576, 0, 0) // Fix the black bars from rotating
+        .crop(1024, 768, 0, 0) // Fix the black bars from rotating
 
         // Prompt Shadow
-        .font(__dirname + '/../public/fonts/Arvo-Regular.ttf', 30)
+        .font(__dirname + '/../public/fonts/Arvo-Regular.ttf', 40)
         .stroke("#000000", 1)
         .fill("#000000")
-        .drawText(-130, -280, wrapText(prompt, 42), 'center')
+        .drawText(-173, -375, wrapText(prompt, 42), 'center')
         
         // Prompt
         .stroke("#2fb3ed", 1)
         .fill("#2fb3ed")
-        .drawText(-130, -285, wrapText(prompt, 42), 'center')
+        .drawText(-173, -380, wrapText(prompt, 42), 'center')
         
         .toBuffer('png', function(err, buffer){
             cb(buffer);
@@ -146,39 +146,71 @@ function makeImage(prompt, choices, cb){
         
         // Create the image
         var image = im(__dirname + '/../public/images/arrangement-' + choices.length + '.png')
-        .resize(768,576)
+        // Originally 1024x768
+        // .resize(768,576)
         .stroke("#000000", 1)
 
         // Write the choices
-        .font(__dirname + '/../public/fonts/AmaticSC-Regular.ttf', 24)
+        .font(__dirname + '/../public/fonts/AmaticSC-Regular.ttf', 32)
         .stroke("#000000", 1)
         .fill("#000000");
         
+        var position;
+        // Left tilted choices
+        image.rotate("#000", 5);
         for(var i = 0; i < choices.length; i++){
-            var position = positions[arrangement[i]];
-            image
-            // .fill("#FFFFFF")
-            // .stroke("#000000", 3)
-            // .drawRectangle(position.x-100 + (768/2), position.y-40 + (576/2),
-            //     position.x+100 + (768/2), position.y+40 + (576/2), 2, 2)
-            .fill("#000000")
-            .stroke("#000000", 1)
-            .drawText(position.x, position.y, wrapText(choices[i], 30), 'center');
+            console.log("Checking left " + arrangement[i]);
+            if( ["3", "7"].indexOf(arrangement[i]) > -1 ){
+                console.log("Found left " + arrangement[i]);
+                position = positions[arrangement[i]];
+                image
+                .fill("#000000")
+                .stroke("#000000", 1)
+                .drawText(position.x, position.y, wrapText(choices[i], 28), 'center');
+            }
+        }
+
+        // Right tilted choices
+        image.rotate("#000", -10);
+        for(i = 0; i < choices.length; i++){
+            if(["1", "9"].indexOf(arrangement[i]) > -1 ){
+                console.log("Found right " + arrangement[i]);
+                position = positions[arrangement[i]];
+                image
+                .fill("#000000")
+                .stroke("#000000", 1)
+                .drawText(position.x, position.y, wrapText(choices[i], 28), 'center');
+            }
+        }
+
+        // Normal choices
+        image.rotate("#000", 5);
+        for(i = 0; i < choices.length; i++){
+            if(["2", "4", "5", "6", "8"].indexOf(arrangement[i]) > -1 ){
+                console.log("Found center " + arrangement[i]);
+                position = positions[arrangement[i]];
+                image
+                .fill("#000000")
+                .stroke("#000000", 1)
+                .drawText(position.x, position.y, wrapText(choices[i], 28), 'center');
+            }
         }
 
 
         // Prompt Shadow
         image
-        .font(__dirname + '/../public/fonts/Arvo-Regular.ttf', 30)
+        .font(__dirname + '/../public/fonts/Arvo-Regular.ttf', 40)
         .stroke("#000000", 1)
         .fill("#000000")
-        .drawText(0, -135, wrapText(prompt, 42), 'center')
+        .drawText(-145, -365, wrapText(prompt, 42), 'center')
         
         // Prompt
         .stroke("#2fb3ed", 1)
         .fill("#2fb3ed")
-        .drawText(0, -140, wrapText(prompt, 42), 'center')
+        .drawText(-145, -370, wrapText(prompt, 42), 'center')
         
+        .crop(1024, 768, 0, 0)
+        .resize(768,576)
         .toBuffer('png', function(err, buffer){
             cb(buffer);
         });
