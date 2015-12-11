@@ -1,9 +1,16 @@
 javascript: {
+    var playerHolder = document.getElementById("player");
+    var quiplashVote = document.getElementById("quiplash-vote");
+    if( document.getElementById("demo-button") ) {
+        alert("You must call this as a bookmarklet to work");
+    } else {
+        alert("Press this bookmarklet when you're in a game");
+    }
+
     var prompt = false;
     var choices = [];
     var imageHost = "http://quipimages.herokuapp.com/images";
     
-
     function updatePrompt(){
         prompt = $("#state-vote #question-text").text();
     }
@@ -41,15 +48,17 @@ javascript: {
             updateChoices();
             updatePrompt();
             var tweetLink = document.getElementById("tweetLink");
-            tweetLink.innerHTML = "Tweet this"
+            tweetLink.innerHTML = "Tweet this";
         }
 
     }
 
-    document.getElementById("quiplash-vote").addEventListener('DOMSubtreeModified', voteHandler);
+    if(typeof tweetThisButtonInitialized === undefined){
+        if (quiplashVote) quiplashVote.addEventListener('DOMSubtreeModified', voteHandler);
+        if (playerHolder) playerHolder.innerHTML = playerHolder.innerHTML + "<a id='tweetLink' href='javascript:void(0);' onclick='sendTweet()'></a>";
+        if (playerHolder) playerHolder.style.backgroundColor = "#ffcc00";
+        var tweetThisButtonInitialized = true;
+    }
 
-    var playerHolder = document.getElementById("player");
-    playerHolder.innerHTML = playerHolder.innerHTML + "<a id='tweetLink' href='javascript:void(0);' onclick='sendTweet()'></a>";
-    playerHolder.style.backgroundColor = "#ffcc00";
 }
 void(0);

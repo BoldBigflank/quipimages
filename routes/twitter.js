@@ -40,7 +40,7 @@ router.get("/callback", function(req, res){
         // Send the user back to whatever they were doing
         if(req.session.originalUrl) res.redirect(req.session.originalUrl);
         else{
-            res.status(200).send("No error");
+            res.status(200).send("You have authenticated, but we don't know where to send you. Please try again.");
         }
     }
 });

@@ -1,5 +1,30 @@
 extends layout
 
 block content
-    h1= title
-    p Welcome to Express
+    .container
+        .well.well-lg
+            .center-block.text-center
+                h1 Quiplash "Tweet this" Button
+                h2 Setup
+                br
+                p Drag this bookmarklet to your Bookmarks bar
+                br
+                p#demo-button
+                    a.btn.btn-primary(href="#{bookmarklet}") Quiplash Tweet This
+                br
+                p When you are in a Quiplash game (after entering your room code), hit this bookmarklet from your bookmark bar. The top will turn gold to indicate it worked.
+                br
+                h2 Use
+                p When you are in a round you want to share, click the "Tweet this" link under your name. Edit the pre-filled tweet text how you wish, then hit "Tweet".
+                br
+                span.label.label-warning Note:
+                | You will need to authorize the app to post on your behalf on your first tweet only.
+        ul.list-unstyled
+            li.pull-right Created by 
+                a(href="http://twitter.com/BoldBigflank") Alex Swan
+            li.pull-left Graphics by 
+                a(href="http://twitter.com/BoldBigflank") Toadboy123
+
+                    
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
+    script(src='https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js')
