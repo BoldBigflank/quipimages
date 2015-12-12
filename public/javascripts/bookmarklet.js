@@ -1,5 +1,5 @@
 javascript: {
-    if(typeof tweetThisButtonInitialized === undefined)
+    if(typeof tweetThisButtonInitialized === 'undefined')
         var tweetThisButtonInitialized = false;
     var playerHolder = document.getElementById("player");
     var quiplashVote = document.getElementById("quiplash-vote");
@@ -9,8 +9,8 @@ javascript: {
         alert("Press this bookmarklet when you're in a game");
     }
     
-    var prompt = false;
-    var choices = [];
+    if (typeof prompt === 'undefined') var prompt = false;
+    if (typeof choices === 'undefined') var choices = [];
     var imageHost = "http://quipimages.herokuapp.com/images";
     
     function updatePrompt(){
@@ -44,21 +44,26 @@ javascript: {
         win.focus();
     }
 
-    function voteHandler(event){
-        if(document.getElementById("quiplash-vote").innerHTML !== ""){
-            updateChoices();
-            updatePrompt();
-            var tweetLink = document.getElementById("tweetLink");
-            tweetLink.innerHTML = "Tweet this";
-        }
+    if(typeof voteHandler === 'undefined' ){
+        function voteHandler(event){
+            if(document.getElementById("quiplash-vote").innerHTML !== ""){
+                updateChoices();
+                updatePrompt();
+                var tweetLink = document.getElementById("tweetLink");
+                tweetLink.innerHTML = "Tweet this";
+            }
 
+        }
     }
     
+    
     if(!tweetThisButtonInitialized){
-        if (quiplashVote !== null) quiplashVote.addEventListener('DOMSubtreeModified', voteHandler);
+        if (quiplashVote) quiplashVote.addEventListener('DOMSubtreeModified', voteHandler);
         if (playerHolder) playerHolder.innerHTML = playerHolder.innerHTML + "<a id='tweetLink' href='javascript:void(0);' onclick='sendTweet()'></a>";
         tweetThisButtonInitialized = true;
-        voteHandler();
+        voteHandler({});
+    } else {
+        sendTweet({});
     }
     if (playerHolder) playerHolder.style.backgroundColor = "#ffcc00";
 
