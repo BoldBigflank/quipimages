@@ -118,11 +118,11 @@ function makeImage(prompt, choices, cb){
         .stroke("#000000", 0.1)
         .fill("#000000")
         .rotate("#000", 6)
-        .drawText(-265, 0, wrapText(choices[0], 23), 'center')
+        .drawText(-265, 18, wrapText(choices[0], 23), 'center')
         
         // Right
         .rotate("#000", -12)
-        .drawText(99, -121, wrapText(choices[1], 23), 'center')
+        .drawText(99, -111, wrapText(choices[1], 23), 'center')
 
         .rotate("#000", 6) // Return to normal
         .crop(1024, 768, 0, 0) // Fix the black bars from rotating
