@@ -110,12 +110,12 @@ function makeImage(prompt, choices, cb){
     if(choices.length == 2){
         im(__dirname + '/../public/images/photo-centered.png')
         // .resize(768,576)
-        .stroke("#000000", 1)
+        .stroke("#000000", .1)
 
         // Left
         // .font("Helvetica-Narrow", 24)
-        .font(__dirname + '/../public/fonts/AmaticSC-Regular.ttf', 48)
-        .stroke("#000000", 1)
+        .font(__dirname + '/../public/fonts/JustAnotherHand.ttf', 48)
+        .stroke("#000000", 0.1)
         .fill("#000000")
         .rotate("#000", 6)
         .drawText(-265, 0, wrapText(choices[0], 23), 'center')
@@ -129,12 +129,12 @@ function makeImage(prompt, choices, cb){
 
         // Prompt Shadow
         .font(__dirname + '/../public/fonts/Arvo-Regular.ttf', 40)
-        .stroke("#000000", 1)
+        .stroke("#000000", .1)
         .fill("#000000")
         .drawText(-173, -375, wrapText(prompt, 42), 'center')
         
         // Prompt
-        .stroke("#2fb3ed", 1)
+        .stroke("#2fb3ed", .1)
         .fill("#2fb3ed")
         .drawText(-173, -380, wrapText(prompt, 42), 'center')
         
@@ -148,11 +148,11 @@ function makeImage(prompt, choices, cb){
         var image = im(__dirname + '/../public/images/arrangement-' + choices.length + '.png')
         // Originally 1024x768
         // .resize(768,576)
-        .stroke("#000000", 1)
+        .stroke("#000000", .1)
 
         // Write the choices
-        .font(__dirname + '/../public/fonts/AmaticSC-Regular.ttf', 32)
-        .stroke("#000000", 1)
+        .font(__dirname + '/../public/fonts/JustAnotherHand.ttf', 32)
+        .stroke("#000000", .1)
         .fill("#000000");
         
         var position;
@@ -165,8 +165,8 @@ function makeImage(prompt, choices, cb){
                 position = positions[arrangement[i]];
                 image
                 .fill("#000000")
-                .stroke("#000000", 1)
-                .drawText(position.x, position.y, wrapText(choices[i], 28), 'center');
+                .stroke("#000000", .1)
+                .drawText(position.x, position.y, wrapText(choices[i], 23), 'center');
             }
         }
 
@@ -178,8 +178,8 @@ function makeImage(prompt, choices, cb){
                 position = positions[arrangement[i]];
                 image
                 .fill("#000000")
-                .stroke("#000000", 1)
-                .drawText(position.x, position.y, wrapText(choices[i], 28), 'center');
+                .stroke("#000000", .1)
+                .drawText(position.x, position.y, wrapText(choices[i], 23), 'center');
             }
         }
 
@@ -191,8 +191,8 @@ function makeImage(prompt, choices, cb){
                 position = positions[arrangement[i]];
                 image
                 .fill("#000000")
-                .stroke("#000000", 1)
-                .drawText(position.x, position.y, wrapText(choices[i], 28), 'center');
+                .stroke("#000000", 0.1)
+                .drawText(position.x, position.y, wrapText(choices[i], 23), 'center');
             }
         }
 
@@ -200,12 +200,12 @@ function makeImage(prompt, choices, cb){
         // Prompt Shadow
         image
         .font(__dirname + '/../public/fonts/Arvo-Regular.ttf', 40)
-        .stroke("#000000", 1)
+        .stroke("#000000", .1)
         .fill("#000000")
         .drawText(-145, -365, wrapText(prompt, 42), 'center')
         
         // Prompt
-        .stroke("#2fb3ed", 1)
+        .stroke("#2fb3ed", .1)
         .fill("#2fb3ed")
         .drawText(-145, -370, wrapText(prompt, 42), 'center')
         
