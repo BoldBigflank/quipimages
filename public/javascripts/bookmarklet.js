@@ -36,7 +36,7 @@ javascript: {
         var imageUri = "/tweet?prompt=" + encodeURIComponent( prompt );
 
         for(var i = 0; i < choices.length; i++){
-            imageUri += "&choice=" + encodeURIComponent( choices[i] );
+            imageUri += "&choice=" + encodeURIComponent( choices[i].substr(0,48) );
         }
         var imageUrl = imageHost + imageUri;
         
