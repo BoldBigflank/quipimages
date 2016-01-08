@@ -1,0 +1,28 @@
+extends layout
+
+block content
+    .container
+        .well.well-lg
+            .center-block.text-center
+                h1 Drawful Color Palette Button
+                h2 Setup
+                p Drag this bookmarklet to your Bookmarks bar:
+                br
+                p#demo-button
+                    a.btn.btn-primary(href="#{bookmarklet}") Drawful Colors
+                    br
+                    small Or view the 
+                        a(href="/javascripts/drawful-colors.js") source
+                br
+                p When you join a Drawful game (after entering your room code), hit this bookmarklet from your bookmark bar. The top will show a table of colors.
+                br
+                h2 Use
+                p Select which color you would like to use. The text above the palette will be displayed as your currently selected color. Select the emoji to place an emoji on the canvas.
+                br
+                br
+        ul.list-unstyled
+            li.pull-right Created by 
+                a(href="http://twitter.com/BoldBigflank") Alex Swan
+                    
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js')
+    script(src='https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js')
