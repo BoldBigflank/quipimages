@@ -5,7 +5,8 @@ This contains the logic to create a shareable image of Quiplash prompts and choi
 
 ## To add a "Tweet this" link to your client
 
-https://gist.github.com/BoldBigflank/ba57c191594fa8e5493f
+Instructions can be found at:  
+http://quipimages.herokuapp.com
 
 
 ## How it works:
